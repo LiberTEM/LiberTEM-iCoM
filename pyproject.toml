@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "libertem-icom"
+description = "Integrated center of mass / differential phase contrast following https://doi.org/10.1038/s41598-018-20377-2"
+license = {file = "LICENSE"}
+keywords = ["phase contrast", "LiberTEM", "center of mass", "differential phase contrast"]
+requires-python = ">=3.7"
+dynamic = ["version", "readme"]
+dependencies = [
+    "numpy",
+    "libertem>0.11",
+    "typing-extensions",
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Development Status :: 3 - Alpha",
+]
+authors = [
+    {name="Dieter Weber", email="d.weber@fz-juelich.de"},
+]
+
+[project.urls]
+repository = "https://github.com/LiberTEM/LiberTEM-iCoM"
+
+[project.optional-dependencies]
+test = ["pytest"]
+
+[tool.setuptools.dynamic]
+version = {attr = "libertem_icom.__version__"}
+readme = {file = ["README.md"], content-type="text/markdown"}
