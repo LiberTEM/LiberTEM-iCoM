@@ -1,5 +1,5 @@
 import numpy as np
-from libertem.udf.com import COMUDF
+from libertem.udf.com import CoMUDF
 
 
 def iDPC(y_centers, x_centers, xp):
@@ -35,7 +35,7 @@ def iDPC(y_centers, x_centers, xp):
     return xp.fft.irfft2(fft_iDPC)
 
 
-class ICOMUDF(COMUDF):
+class ICoMUDF(CoMUDF):
     def get_result_buffers(self):
         result = super().get_result_buffers()
         dtype = np.result_type(self.meta.input_dtype, np.float32)
