@@ -16,7 +16,7 @@ def iDPC(y_centers, x_centers, xp):
 
     half_x = int(xp.ceil((realx + 1) / 2))
 
-    # Instead of convertig the complex result to a Hermitian,
+    # Instead of converting the complex result to a Hermitian,
     # we just take the FFT for real values that doesn't even calculate
     # those values
 
