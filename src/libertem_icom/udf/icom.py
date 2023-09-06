@@ -3,6 +3,24 @@ from libertem.udf.com import CoMUDF
 
 
 def iDPC(y_centers, x_centers, xp):
+    '''
+    Perform the iDPC calculation from the shift vector field following
+    https://doi.org/10.1038/s41598-018-20377-2
+
+    Parameters
+    ----------
+
+    y_centers, x_centers : array-like
+        2D array with Y resp. X component of the shift vector field. It's type
+        should be compatible with the :code:`xp` parameter.
+    xp : module
+        Array backend library to use, tyically :mod:`numpy` or :mod:`cupy`.
+
+    Returns
+    -------
+
+    iDPC : 2D array-like of the same shape as y_centers and x_centers
+    '''
     realy = x_centers.shape[0]
     realx = x_centers.shape[1]
 
@@ -32,10 +50,14 @@ def iDPC(y_centers, x_centers, xp):
     # We can't calculate the absolute phase anyway
     fft_iDPC[0, 0] = 0
 
-    return xp.fft.irfft2(fft_iDPC)
+    return xp.fft.irfft2(fft_iDPC, s=(realy, realx))
 
 
 class ICoMUDF(CoMUDF):
+    '''
+    :class:`libertem.udf.com.CoMUDF` extended with an additional result buffer
+    with key :code:`'potential'`.
+    '''
     def get_result_buffers(self):
         result = super().get_result_buffers()
         dtype = np.result_type(self.meta.input_dtype, np.float32)
